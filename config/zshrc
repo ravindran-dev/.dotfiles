@@ -1,0 +1,135 @@
+# Enable Powerlevel11k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+fastfetch
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# If not running interactively, don't do anything
+#fastfetch --kitty-direct /home/ravi/Downloads/anime.png --logo-width 30 --logo-height 25
+#fastfetch --logo-padding 8 --logo-height 24 /home/ravi/Downloads/anime.png
+
+[[ $- != *i* ]] && return
+#fastfetch --kitty-direct /home/ravi/Downloads/anime.png --logo-width 30 --logo-height 25
+
+
+plugins=(git zsh-autosuggestions) # Add other plugins as needed
+
+
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' rehash true
+
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#888888'
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+alias cls='clear'
+alias sdn='shutdown now'
+alias ex='exit'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias showimg='display_image'
+#autoload -Uz vcs_info
+#zstyle ':vcs_info:git:*' formats '%F{magenta}(%b)%f'  # Color format for Git branch
+
+precmd() { vcs_info }           # Update vcs_info before each prompt
+setopt prompt_subst             # Enable prompt string substitution for variables
+
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+#zstyle ':vcs_info:git:*' formats " %b"
+#zstyle ':vcs_info:*' enable git
+
+#PS1='%F{yellow}%D{%H:%M}%f ⚡ %F{cyan}%n@%m %~%f ${vcs_info_msg_0_} %# '
+# Load vcs_info
+#autoload -Uz vcs_info
+#precmd() { vcs_info }
+
+# Branch name with icon and colors
+#zstyle ':vcs_info:git:*' formats "%F{magenta}  %b %f"
+#zstyle ':vcs_info:git:*' actionformats "%F{red}  %b|%a %f"
+
+# Enable git
+#zstyle ':vcs_info:*' enable git
+
+# Your prompt
+#PS1='%F{yellow}%D{%H:%M}%f ⚡ %F{cyan}%n@%m %~%f ${vcs_info_msg_0_} %# '
+
+autoload -Uz vcs_info
+autoload -U colors && colors
+
+ #--- Git branch name with icon and colors ---
+zstyle ':vcs_info:git:*' formats "%F{magenta}   %b%f"
+zstyle ':vcs_info:git:*' actionformats "%F{red}   %b|%a%f"
+zstyle ':vcs_info:*' enable git
+
+# --- Symbols for rotating cursor ---
+
+# --- Symbol cycle (1-indexed in zsh) ---
+typeset -ga symbols=( "󱞩" "󱞩" "󱞩" "󱞩" "󱞩" "󱞩" )
+typeset -gi idx=1
+
+# --- precmd hook (runs before each prompt) ---
+precmd() {
+  # Main prompt (user@host path
+  vcs_info
+  PROMPT="
+%F{yellow}%D{%H:%M}%f %F{cyan}%n@%m %F{blue}%~%f ${vcs_info_msg_0_}
+%F{magenta}${symbols[$idx]}%f "
+  # Rotate index safely (1…N wrap)
+  (( idx = (idx % ${#symbols[@]}) + 1 ))
+}
+
+
+
+# --- Run once at shell startup to fix missing first symbol ---
+precmd
+
+# Note: bind used instead of sticking these in .inputrc
+if [[ $interactiveShellTest > 0 ]]; then bind "set completion-ignore-case on"; fi
+
+# Improve history behavior
+setopt APPEND_HISTORY       # Append history instead of overwriting
+setopt SHARE_HISTORY        # Share history across multiple terminals
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt INC_APPEND_HISTORY   # Add commands to history immediately
+
+HISTFILE=~/.zsh_history    # History file path
+HISTSIZE=1000              # Number of commands to keep in memory
+SAVEHIST=1000              # Number of commands to save in the file
+
+# Bind up/down arrows to search history based on current typed text
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+
+bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+bindkey "${terminfo[kcuu1]}" backward-history
+bindkey "${terminfo[kcud1]}" forward-history
+autoload -U compinit
+compinit
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+display_image() {
+    if command -v chafa &> /dev/null; then
+        chafa "$1"
+    elif command -v img2sixel &> /dev/null; then
+        img2sixel "$1"
+    else
+        echo "Image viewer not found. Please install chafa or img2sixel."
+    fi
+}
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# Created by `pipx` on 2025-09-01 06:19:26
+export PATH="$PATH:/home/ravi/.local/bin"
+
