@@ -23,8 +23,9 @@ sudo pacman -S --noconfirm \
     fastfetch \
     unzip \
     zip \
-    gnome-calculator \
-    firefox
+    kcalc \
+    firefox \
+    discord
 
 # ----------- AUR HELPERS -----------
 # Paru
