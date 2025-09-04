@@ -80,4 +80,10 @@ echo "Open tmux and press prefix + I to install tmux plugins."
 # =========================================
 #Save this as clone_repos.sh.
 
-#Make it executable: ./clone_repos.sh
+#Make it executable: ./clone_repos.s
+
+
+
+#To install neovim in arch linux
+#git clone https://github.com/Fawz-Haaroon/nvim ~/.config/nvim
+#cd ~/.config/nvim && chmod +x install.sh && bash ./install.shh
