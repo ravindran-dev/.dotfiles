@@ -88,3 +88,13 @@ echo "Open tmux and press prefix + I to install tmux plugins."
 #To install neovim in arch linux
 #git clone https://github.com/Fawz-Haaroon/nvim ~/.config/nvim
 #cd ~/.config/nvim && chmod +x install.sh && bash ./install.shh
+
+
+#To have beautifull progress bar
+
+#Run: sudo nano /etc/pacman.conf
+#scroll to the [options] section, add a new line containing exactly "ILoveCandy"
+
+
+#Save and exit at nano
+#ctrl+o, enter and ctrl+x
