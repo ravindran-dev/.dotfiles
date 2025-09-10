@@ -20,6 +20,8 @@ sudo pacman -S --noconfirm \
     tmux \
     zsh \
     htop \
+    btop \
+
     fastfetch \
     unzip \
     zip \
@@ -45,6 +47,14 @@ if [ ! -d ~/yay ]; then
     makepkg -si --noconfirm
     cd ~
 fi
+
+#-----installing Brave browser--------
+echo ">>> Installing brave browser..."
+yay -S brave-bin
+
+#-----installing VS code--------------
+echo ">>> installing VS code..."
+yay -S visual-studio-code-bin
 
 # ----------- SNAP SUPPORT -----------
 echo ">>> Installing snapd..."
@@ -81,7 +91,11 @@ echo "Open tmux and press prefix + I to install tmux plugins."
 # =========================================
 #Save this as clone_repos.sh.
 
-#Make it executable: ./clone_repos.s
+#Make it executable: chmod +x ~/dotfiles/clone_repos.sh
+
+#Run it using:  cd ~/dotfiles
+#               ./clone_repos.sh
+
 
 
 
