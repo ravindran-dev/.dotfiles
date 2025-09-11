@@ -126,3 +126,11 @@ gh auth login
 
 #Save and exit at nano
 #ctrl+o, enter and ctrl+x
+
+
+# To get the mirrorlist
+
+echo ">>> Installing mirrorlist...."
+sudo cp -rf /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+sudo cp -rf ~/Downloads/mirrorlist /etc/pacman.d/mirrorlist
+sudo pacman -Sy
