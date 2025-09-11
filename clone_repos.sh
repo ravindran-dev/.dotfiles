@@ -21,10 +21,14 @@ sudo pacman -S --noconfirm \
     zsh \
     htop \
     btop \
-
+    kdeconnect \
     fastfetch \
     unzip \
     zip \
+    zlib \
+    xz \
+    tk \
+
     kcalc \
     firefox \
     discord
