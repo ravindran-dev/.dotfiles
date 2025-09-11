@@ -50,11 +50,16 @@ fi
 
 #-----installing Brave browser--------
 echo ">>> Installing brave browser..."
-yay -S brave-bin
+paru -S brave-bin
 
 #-----installing VS code--------------
 echo ">>> installing VS code..."
 yay -S visual-studio-code-bin
+
+#------installing google-chrome-------
+
+echo ">>> installing google-chrome...."
+yay -S google-chrome
 
 # ----------- SNAP SUPPORT -----------
 echo ">>> Installing snapd..."
@@ -72,6 +77,7 @@ fi
 # ----------- TMUX CONFIG -----------
 # Tmux Plugin Manager (TPM)
 echo ">>> Cloning Tmux Plugin Manager..."
+
 if [ ! -d ~/.tmux/plugins/tpm ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
@@ -81,6 +87,10 @@ echo ">>> Setup complete!"
 echo "Run 'chsh -s $(which zsh)' to set zsh as your default shell."
 echo "Open tmux and press prefix + I to install tmux plugins."
 
+
+echo ">>> Installing Github-cli..."
+sudo pacman -S github-cli
+gh auth login
 # =========================================
 # END
 # After cloning, you may want to:
