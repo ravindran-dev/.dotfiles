@@ -12,10 +12,12 @@ fi
 
 [[ $- != *i* ]] && return
 #fastfetch --kitty-direct /home/ravi/Downloads/anime.png --logo-width 30 --logo-height 25
-
-
-plugins=(git zsh-autosuggestions) # Add other plugins as needed
-
+# Highlight root prompt
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 
 autoload -Uz compinit
 compinit
@@ -107,12 +109,41 @@ SAVEHIST=1000              # Number of commands to save in the file
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
+
+# Up/Down search by what you typed
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+
+
 bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
 bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 bindkey "${terminfo[kcuu1]}" backward-history
 bindkey "${terminfo[kcud1]}" forward-history
 autoload -U compinit
 compinit
+# Case-insensitive and partial completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu selec
+
+# Group results and add colors
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format '%F{red}-- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}no matches for: %d%f'
+zstyle ':completion:*:corrections' format '%F{green}[%d]%f'
+
+
+# Ignore case
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# Correct minor typos
+setopt correct_all
+
+setopt auto_cd        # just type folder name to cd
+setopt auto_pushd     # keeps directory stack
+setopt autoparamslash # auto add slash in paths
+
+
+
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 display_image() {
@@ -124,6 +155,9 @@ display_image() {
         echo "Image viewer not found. Please install chafa or img2sixel."
     fi
 }
+
+
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
