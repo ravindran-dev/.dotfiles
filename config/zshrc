@@ -1,4 +1,4 @@
-# Enable Powerlevel11k instant prompt. Should stay close to the top of ~/.zshrc.
+ # Enable Powerlevel11k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 fastfetch
@@ -18,6 +18,8 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
+source ${ZSH_CUSTOM:-~/.zsh}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ${ZSH_CUSTOM:-~/.zsh}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 autoload -Uz compinit
 compinit
@@ -145,7 +147,8 @@ setopt autoparamslash # auto add slash in paths
 
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.powerlevel10k/powerlevel10k.zsh-theme
+
 display_image() {
     if command -v chafa &> /dev/null; then
         chafa "$1"

@@ -89,9 +89,18 @@ sudo snap install hello-world
 # ----------- SHELL CONFIG -----------
 # Powerlevel10k (Zsh theme)
 echo ">>> Cloning Powerlevel10k..."
-if [ ! -d ~/.powerlevel10k ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
-fi
+# Create plugin folder if not exists
+mkdir -p ~/.zsh
+
+# 1. Zsh Autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+# 2. Zsh Syntax Highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+
+# 3. Powerlevel10k Theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh/powerlevel10k
+
 
 # ----------- TMUX CONFIG -----------
 # Tmux Plugin Manager (TPM)
@@ -125,10 +134,6 @@ gh auth login
 #Run it using:  cd ~/dotfiles
 #               ./clone_repos.sh
 
-#sudo nano /etc/pacman.conf
-#scroll to the [options] section, add a new line containing exactly "ILoveCandy"
-#Save and exit at nano
-#ctrl+o, enter and ctrl+x
 
 
 #To install neovim in arch linux
