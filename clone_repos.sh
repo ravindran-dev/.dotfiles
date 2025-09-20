@@ -76,6 +76,10 @@ yay -S visual-studio-code-bin
 echo ">>> installing google-chrome...."
 yay -S google-chrome
 
+#------installing spotify-------
+echo ">>> installing spotify...."
+yay -S spotify
+
 # ----------- SNAP SUPPORT -----------
 echo ">>> Installing snapd..."
 yay -S --noconfirm snapd
