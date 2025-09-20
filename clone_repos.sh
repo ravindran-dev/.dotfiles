@@ -9,6 +9,18 @@
 echo ">>> Updating system..."
 sudo pacman -Syu --noconfirm
 
+# To get the mirrorlist
+
+echo ">>> Installing mirrorlist...."
+sudo cp -rf /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+sudo cp -rf ~/Downloads/mirrorlist /etc/pacman.d/mirrorlist
+sudo pacman -Syu
+
+# Set timezone to Asia/Kolkata
+echo ">>> Setting timezone to Asia/Kolkata..."
+sudo timedatectl set-timezone Asia/Kolkata
+
+
 # ----------- ESSENTIAL PACKAGES -----------
 echo ">>> Installing Arch essentials..."
 sudo pacman -S --noconfirm \
@@ -28,7 +40,6 @@ sudo pacman -S --noconfirm \
     zlib \
     xz \
     tk \
-
     kcalc \
     firefox \
     discord
@@ -67,9 +78,13 @@ yay -S google-chrome
 
 # ----------- SNAP SUPPORT -----------
 echo ">>> Installing snapd..."
-sudo pacman -S --noconfirm snapd
+yay -S --noconfirm snapd
 sudo systemctl enable --now snapd.socket
-sudo ln -s /var/lib/snapd/snap /snap 2>/dev/null || true
+
+sudo ln -s /var/lib/snapd/snap /snap
+snap version
+sudo snap install hello-world
+
 
 # ----------- SHELL CONFIG -----------
 # Powerlevel10k (Zsh theme)
@@ -110,7 +125,10 @@ gh auth login
 #Run it using:  cd ~/dotfiles
 #               ./clone_repos.sh
 
-
+#sudo nano /etc/pacman.conf
+#scroll to the [options] section, add a new line containing exactly "ILoveCandy"
+#Save and exit at nano
+#ctrl+o, enter and ctrl+x
 
 
 #To install neovim in arch linux
@@ -128,9 +146,4 @@ gh auth login
 #ctrl+o, enter and ctrl+x
 
 
-# To get the mirrorlist
 
-echo ">>> Installing mirrorlist...."
-sudo cp -rf /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-sudo cp -rf ~/Downloads/mirrorlist /etc/pacman.d/mirrorlist
-sudo pacman -Sy
