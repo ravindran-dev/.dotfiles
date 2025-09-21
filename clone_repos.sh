@@ -50,7 +50,7 @@ echo ">>> Installing paru (AUR helper)..."
 if [ ! -d ~/paru ]; then
     git clone https://aur.archlinux.org/paru.git ~/paru
     cd ~/paru
-    makepkg -si --noconfirm
+    makepkg -si 
     cd ~
 fi
 
@@ -59,7 +59,7 @@ echo ">>> Installing yay (AUR helper)..."
 if [ ! -d ~/yay ]; then
     git clone https://aur.archlinux.org/yay.git ~/yay
     cd ~/yay
-    makepkg -si --noconfirm
+    makepkg -si 
     cd ~
 fi
 
