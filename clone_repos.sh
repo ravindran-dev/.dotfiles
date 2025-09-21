@@ -65,6 +65,11 @@ fi
 
 #-----installing Brave browser--------
 echo ">>> Installing brave browser..."
+export PATH="$HOME/.local/bin:$PATH"
+if ! command -v paru &> /dev/null; then
+    echo "paru not found. Please restart your shell or source ~/.zshrc before running this script."
+    exit 1
+fi
 paru -S brave-bin
 
 #-----installing VS code--------------
