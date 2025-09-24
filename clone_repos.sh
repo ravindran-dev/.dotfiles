@@ -50,7 +50,7 @@ echo ">>> Installing paru (AUR helper)..."
 if [ ! -d ~/paru ]; then
     git clone https://aur.archlinux.org/paru.git ~/paru
     cd ~/paru
-    makepkg -si 
+    makepkg -si --noconfirm
     cd ~
 fi
 
@@ -59,7 +59,7 @@ echo ">>> Installing yay (AUR helper)..."
 if [ ! -d ~/yay ]; then
     git clone https://aur.archlinux.org/yay.git ~/yay
     cd ~/yay
-    makepkg -si 
+    makepkg -si --noconfirm
     cd ~
 fi
 
@@ -90,7 +90,9 @@ echo ">>> Installing snapd..."
 yay -S --noconfirm snapd
 sudo systemctl enable --now snapd.socket
 
-sudo ln -s /var/lib/snapd/snap /snap
+if [ ! -e /snap ]; then
+    sudo ln -s /var/lib/snapd/snap /snap
+fi
 snap version
 sudo snap install hello-world
 
@@ -124,8 +126,8 @@ echo ">>> Setup complete!"
 echo "Run 'chsh -s $(which zsh)' to set zsh as your default shell."
 echo "Open tmux and press prefix + I to install tmux plugins."
 
+echo ">>> Installing GitHub CLI and authenticating..."
 
-echo ">>> Installing Github-cli..."
 sudo pacman -S github-cli
 gh auth login
 # =========================================
@@ -144,8 +146,8 @@ gh auth login
 #               ./clone_repos.sh
 
 
-
-#To install neovim in arch linux
+#git clone https://github.com/Fawz-Haaroon/nvim ~/.config/nvim
+#cd ~/.config/nvim && chmod +x install.sh && bash ./install.sh
 #git clone https://github.com/Fawz-Haaroon/nvim ~/.config/nvim
 #cd ~/.config/nvim && chmod +x install.sh && bash ./install.shh
 
