@@ -5,6 +5,12 @@
 #  Author: Ravindran S
 # =========================================
 
+# ----------- CHANGE DEFAULT SHELL TO ZSH -----------
+sudo pacman -S --noconfirm zsh
+if [ "$SHELL" != "$(which zsh)" ]; then
+    echo ">>> Changing default shell to zsh..."
+    chsh -s "$(which zsh)"
+fi
 # ----------- UPDATE SYSTEM -----------
 echo ">>> Updating system..."
 sudo pacman -Syu --noconfirm
@@ -148,8 +154,7 @@ gh auth login
 
 #git clone https://github.com/Fawz-Haaroon/nvim ~/.config/nvim
 #cd ~/.config/nvim && chmod +x install.sh && bash ./install.sh
-#git clone https://github.com/Fawz-Haaroon/nvim ~/.config/nvim
-#cd ~/.config/nvim && chmod +x install.sh && bash ./install.shh
+
 
 
 #To have beautifull progress bar
